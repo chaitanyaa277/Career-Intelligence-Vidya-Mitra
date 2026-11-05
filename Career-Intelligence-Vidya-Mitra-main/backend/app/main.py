@@ -13,13 +13,18 @@ app = FastAPI(
 )
 
 # CORS configurations for local dev + production flexibility
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=[
+        "http://localhost:5173",
+        # Add your Vercel URL here after deployment
+    ],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # Include API module routing
 app.include_router(auth.router)
